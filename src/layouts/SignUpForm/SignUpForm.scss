@@ -1,0 +1,132 @@
+.signup-form {
+	padding-right: 35px;
+}
+
+.signup-form h5 {
+	font-size: 16px;
+	font-family: "Lato", sans-serif;
+}
+
+.signup-form h5 span {
+	color: #16d0c5;
+}
+
+.signup-form .form-group {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.signup-form .form-group span {
+	position: absolute;
+	right: 0;
+	top: 10px;
+	font-size: 16px;
+	color: #7bc063;
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.signup-form .form-group span.active {
+	opacity: 1;
+}
+
+.signup-form .check-form {
+	padding-right: 20px;
+}
+
+.signup-form input,
+.signup-form textarea {
+	width: 100%;
+	height: 50px;
+	border: none;
+	border-bottom: 1px solid #ebebeb;
+	font-size: 16px;
+	padding-bottom: 10px;
+	color: #20509e;
+}
+
+.signup-form input:focus,
+.signup-form textarea:focus {
+	border-color: #20509e;
+}
+
+.signup-form textarea {
+	padding-bottom: 10px;
+	padding-top: 10px;
+	height: 115px;
+}
+
+.signup-form .signup-type .ct-label {
+	display: inline-block;
+	position: relative;
+	padding-left: 20px;
+	margin-bottom: 12px;
+	margin-right: 40px;
+	cursor: pointer;
+	font-size: 16px;
+	color: #acb9cc;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.signup-form .signup-type .ct-label input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.signup-form .signup-type .ct-label input:checked~.checkmark:after {
+	content: '\f111';
+	color: #16d0c5;
+}
+
+.signup-form .signup-type .ct-label .checkmark {
+	position: absolute;
+	top: 3px;
+	left: 0;
+	height: 25px;
+	width: 25px;
+}
+
+.signup-form .signup-type .ct-label .checkmark:after {
+	position: absolute;
+	content: "\f10c";
+	font-family: 'FontAwesome';
+	font-size: 14px;
+}
+
+.signup-form .signup-type .ct-label:last-child {
+	margin-right: 0;
+}
+
+.signup-form ::-webkit-input-placeholder {
+	color: #acb9cc;
+}
+
+.signup-form :-ms-input-placeholder {
+	color: #acb9cc;
+}
+
+.signup-form ::-ms-input-placeholder {
+	color: #acb9cc;
+}
+
+.signup-form ::placeholder {
+	color: #acb9cc;
+}
+
+.map {
+	height: 390px;
+	-webkit-box-shadow: 0px 23px 49px rgba(33, 54, 61, 0.15);
+	        box-shadow: 0px 23px 49px rgba(33, 54, 61, 0.15);
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}

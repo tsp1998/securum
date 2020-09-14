@@ -1,0 +1,118 @@
+.hero-section {
+  height: 900px;
+  padding-top: 260px;
+  display: block;
+  background-image: url("../../assets/img/hero-bg.png");
+  background-size: cover;
+  background-color: #f3f7f9;
+  background-position: right top;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section .laptop-image {
+  width: 685px;
+  max-width: none;
+  position: relative;
+  left: 80px;
+}
+
+.hero-text {
+  padding-top: 60px;
+}
+
+.hero-text h2 {
+  font-size: 70px;
+  margin-bottom: 35px;
+}
+
+.hero-text h2 span {
+  color: #16d0c5;
+}
+
+.hero-text h4 {
+  color: #75849a;
+  font-size: 22px;
+}
+
+.hero-subscribe-from {
+  margin-top: 50px;
+  display: block;
+}
+
+.hero-subscribe-from input {
+  width: 315px;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  height: 48px;
+  padding: 0 25px;
+  border-radius: 50px;
+  font-family: "Futura", sans-serif;
+  font-size: 16px;
+  margin-right: 8px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}
+
+@media (max-width: 1585px) {
+	.hero-section .laptop-image {
+		left: 0;
+	}
+}
+
+@media (max-width: 1425px) {
+
+	.hero-section{
+		background-position: right 30% top;
+	}
+}
+
+@media (max-width: 1425px) {
+	.hero-section .laptop-image {
+		width: auto;
+		max-width: 100%;
+		top: 70px;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+	.hero-section{
+		background-position: right 23% top;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.hero-section {
+		background-position: right 25% top;
+		height: 730px;
+		padding-top: 160px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.hero-text h2 {
+		font-size: 45px;
+	}
+}
+
+
+@media only screen and (max-width: 767px) {
+	.hero-text h2 {
+		font-size: 40px;
+	}
+
+	.hero-section {
+		height: auto;
+		padding-bottom: 100px;
+		padding-top: 160px;
+		background-position: right 50% top;
+	}
+
+}

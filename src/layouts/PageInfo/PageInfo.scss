@@ -1,0 +1,76 @@
+.page-info-section {
+	height: 300px;
+	background-image: url("../../assets/img/page-info-bg.png");
+	background-size: cover;
+	background-color: #f3f7f9;
+	background-position: right top;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	padding-top: 100px;
+}
+
+.page-info-section h2 {
+	font-size: 48px;
+}
+
+.site-beradcamb {
+	padding-top: 10px;
+}
+
+.site-beradcamb a {
+	color: #20509e;
+	font-size: 16px;
+}
+
+.site-beradcamb span {
+	color: #acb9cc;
+	font-size: 16px;
+}
+
+.site-beradcamb i {
+	margin: 0 3px;
+}
+
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}
+
+@media (max-width: 1425px) {
+	.page-info-section {
+		background-position: right 30% top;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.page-info-section {
+		background-position: right 23% top;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.page-info-section {
+		background-position: right 33% top;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.page-info-section h2 {
+		font-size: 40px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.page-info-section {
+		background-position: right 56% top;
+		margin-top: 97px;
+	}
+
+	.page-info-section h2 {
+		font-size: 40px;
+	}
+}

@@ -1,0 +1,59 @@
+.process:last-child .process-step:after {
+	display: none;
+}
+
+.process-step {
+	position: relative;
+	text-align: center;
+	padding: 35px;
+	margin-top: 30px;
+	-webkit-box-shadow: 0 14px 43px rgba(33, 54, 61, 0.15);
+	        box-shadow: 0 14px 43px rgba(33, 54, 61, 0.15);
+}
+
+.process-step .process-icon {
+	height: 55px;
+	margin-bottom: 30px;
+	padding-top: 5px;
+}
+
+.process-step h4 {
+	margin-bottom: 15px;
+}
+
+.process-step p {
+	margin-bottom: 0;
+}
+
+.process-step:after {
+	position: absolute;
+	content: '';
+	width: 275px;
+	height: 56px;
+	top: -40px;
+	right: -40%;
+	background: url("../../assets/img/process-line.png") no-repeat scroll 0 0/cover;
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.process-step:after {
+		width: 154px;
+		height: 35px;
+		top: -10px;
+		right: -44%;
+		background-size: contain;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.process-step:after {
+		display: none;
+	}
+}

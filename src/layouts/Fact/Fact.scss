@@ -1,0 +1,73 @@
+@import "../../responsive.scss";
+
+.fact-section {
+	padding: 100px 0;
+}
+
+.fact {
+	display: inline-block;
+	position: relative;
+}
+
+.fact h2 {
+	float: left;
+	color: #16d0c5;
+	font-size: 60px;
+	margin-right: 20px;
+}
+
+.fact p {
+	float: left;
+	padding-top: 14px;
+	line-height: 1.4;
+	color: #fff;
+	text-transform: uppercase;
+}
+
+.fact .faIcon {
+	position: absolute;
+	right: -20px;
+	top: -10px;
+	font-size: 90px;
+	color: #fff;
+	z-index: 0;
+	opacity: 0.1;
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.fact h2 {
+		font-size: 45px;
+		margin-right: 10px;
+	}
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.fact p {
+		padding-top: 7px;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.fact .faIcon {
+		font-size: 67px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.fact {
+		margin-bottom: 30px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.fact {
+		margin-bottom: 30px;
+	}
+}

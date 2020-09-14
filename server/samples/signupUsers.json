@@ -1,0 +1,18 @@
+[
+  {
+    "name": "shubham",
+    "email": "shubham@mail.com",
+    "phone": "1234567890",
+    "password": "123",
+    "username": "shubham",
+    "profileId": ""
+  },
+  {
+    "name": "saurabh",
+    "email": "saurabh@mail.com",
+    "phone": "0987654321",
+    "password": "123",
+    "username": "saurabh",
+    "profileId": ""
+  }
+]

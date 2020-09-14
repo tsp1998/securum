@@ -1,0 +1,42 @@
+@import "../../responsive.scss";
+
+.team-section {
+	background: #f3f7f9;
+	overflow: hidden;
+}
+
+.team-members {
+	margin: 0 -10px;
+	display: flex;
+	justify-content: center;
+
+	@include respond(phone) {
+		flex-wrap: wrap;
+	}
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.team-members {
+		text-align: center;
+	}
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.team-members {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.team-members {
+		margin: 0;
+		padding: 0 15px;
+	}
+}

@@ -1,0 +1,103 @@
+.newsletter-section {
+	padding: 50px 0;
+}
+
+.newsletter-text h2 {
+	font-size: 36px;
+	margin-bottom: 10px;
+}
+
+.newsletter-text p {
+	margin-bottom: 0;
+}
+
+.newsletter-form {
+	position: relative;
+	margin-top: 20px;
+	padding-left: 40px;
+}
+
+.newsletter-form input {
+	width: 100%;
+	font-size: 16px;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 50px;
+	padding-right: 160px;
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+}
+
+.newsletter-form button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	border: none;
+	border-radius: 0px 50px 50px 0px;
+	min-width: 140px;
+	background: #fff;
+	color: #20509e;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.newsletter-form ::-webkit-input-placeholder {
+	color: #fff;
+}
+
+.newsletter-form :-ms-input-placeholder {
+	color: #fff;
+}
+
+.newsletter-form ::-ms-input-placeholder {
+	color: #fff;
+}
+
+.newsletter-form ::placeholder {
+	color: #fff;
+}
+
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1170px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.newsletter-form {
+		padding-left: 0;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.newsletter-section {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.newsletter-form {
+		padding-left: 0;
+	}
+
+	.newsletter-section {
+		text-align: center;
+	}
+}
+
+
+@media only screen and (max-width: 479px) {
+	.newsletter-form input {
+		padding-right: 30px;
+	}
+
+	.newsletter-form button {
+		position: relative;
+		padding: 14px;
+		border-radius: 50px;
+		margin-top: 23px;
+	}
+}
