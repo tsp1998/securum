@@ -12,9 +12,11 @@ exports.getBlocks = async (req, res, next) => {
 
 exports.createBlock = async (req, res, next) => {
   try {
-    let blocksCount = await Block.count({});
     const newBlock = new Block(req.body.block);
-    newBlock.index = blocksCount + 1 || 1;
+    if (!newBlock.index) {
+      let blocksCount = await Block.count({});
+      newBlock.index = blocksCount + 1 || 1;
+    }
     const block = await newBlock.save();
     if (!block) throw new Error("Error while creating Block...")
     else {

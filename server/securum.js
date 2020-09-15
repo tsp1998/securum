@@ -12,6 +12,11 @@ const JWT_SECRET =
     : require("./config/keys").JWT_SECRET;
 const app = express();
 
+// //sample delay
+// app.use((req, res, next) => {
+//   setTimeout(() => { next() }, 500);
+// })
+
 app.use(morgan("dev"))
 app.use(cors());
 app.use(express.json());
@@ -46,6 +51,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/blockchain", require("./routes/blockchainRoutes"));
 app.use("/api/blocks", require("./routes/blockRoutes"));
 app.use("/api/transactions", require("./routes/transactionRoutes"));
+app.use("/api/account", require("./routes/accountRoutes"));
 
 app.get("/api/fileSecret", (req, res, next) => {
   res.json({ token: jwt.sign("fileSecret", JWT_SECRET) });

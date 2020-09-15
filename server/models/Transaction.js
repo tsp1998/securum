@@ -7,6 +7,7 @@ const TransactionSchema = new Schema(
     sender: { type: String, required: true },
     recipient: { type: String, required: true },
     fee: { type: Number, required: true, default: 0 },
+    status: { type: Number, required: true, default: 0 },
   },
   {
     timestamps: true,

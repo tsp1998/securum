@@ -1,6 +1,6 @@
 import React from 'react'
 //routing
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 //css
 import "./Header.scss"
@@ -8,7 +8,13 @@ import "./Header.scss"
 //assets
 import logo from '../../assets/images/logo.png'
 
-const Header = ({ pageName }) => {
+const Header = (props) => {
+  const { pageName } = props;
+  const logout = () => {
+    localStorage.removeItem("securumToken");
+    // ...redux store clear code
+    props.history.push("/")
+  }
   return (
     <header className="header-section clearfix">
       <div className="container-fluid">
@@ -30,11 +36,11 @@ const Header = ({ pageName }) => {
         }
         <nav className="main-menu">
           <ul className="menu-list">
-            <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/blog">Blog</Link></li>
             <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/single-blog">Single Blog</Link></li>
+            {window && localStorage.securumToken && (<li><Link onClick={logout} to="#">Log Out</Link></li>)}
             {/* <li><Link to="/">Solution</Link></li>
             <li><Link to="/about">Features</Link></li>
             <li><Link to="/blog">News</Link></li>
@@ -47,4 +53,4 @@ const Header = ({ pageName }) => {
   )
 }
 
-export default Header
+export default withRouter(Header)

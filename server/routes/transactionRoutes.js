@@ -8,5 +8,6 @@ const auth = require('../middleware/auth')
 router.get("/", auth.verifyUser, transactionController.getTransactions)
 router.post("/create", auth.verifyUser, transactionController.createTransaction)
 router.delete("/:transactionId", auth.verifyMiner, transactionController.deleteTransaction)
+router.put("/update", auth.verifyMiner, transactionController.updateTransactions)
 
 module.exports = router;

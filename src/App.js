@@ -22,6 +22,7 @@ import Overlay from "./components/common/Overlay/Overlay";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
+import { BLOCKCHAIN_SET_SUCCESS } from './redux/blockchain/blockchainTypes'
 // import { clearAllApiCalls, clearAllErrors } from "./redux/generalActions";
 
 // import { SET_USER, SET_AUTHENTICATED } from "./redux/actions/userTypes";
@@ -56,7 +57,10 @@ const ProfilePage = React.lazy(() => import("./pages/ProfilePage/ProfilePage"));
 //   }
 // }
 
-function Routes() {
+//intial store status cleanup
+store.dispatch({ type: BLOCKCHAIN_SET_SUCCESS, value: false })
+
+function App() {
   React.useEffect(() => {
     // store.dispatch(clearAllApiCalls());
     // store.dispatch(clearAllErrors());
@@ -84,4 +88,4 @@ function Routes() {
   );
 }
 
-export default Routes;
+export default App;

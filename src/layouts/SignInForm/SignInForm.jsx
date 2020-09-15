@@ -5,7 +5,7 @@ import "./SignInForm.scss"
 import FA from 'react-fontawesome'
 
 //routing
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 //api
 import { signin } from '../../api/authApi'
@@ -106,6 +106,7 @@ class SignInForm extends React.Component {
                     </button>
                   </div>
                 </div>
+                <Link to="/signup">Sign Up</Link>
               </form>
             </div>
             <div className="col-lg-5 mt-5 mt-lg-0">

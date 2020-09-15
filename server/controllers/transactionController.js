@@ -1,8 +1,15 @@
 const Transaction = require("../models/Transaction")
+const Account = require("../models/Account")
 
 exports.getTransactions = async (req, res, next) => {
   try {
-    const transactions = await Transaction.find({}).exec()
+    let transactions;
+    if (req.user.role === 0) {
+      const account = await Account.findOne({ userId: req.user._id }).exec();
+      const { publicKey } = account;
+      transactions = await Transaction.find({ $or: [{ sender: publicKey }, { recipient: publicKey }] })
+        .sort({ createdAt: -1 }).exec()
+    } else transactions = await Transaction.find({}).sort({ createdAt: -1 }).exec()
     if (!transactions) throw new Error("No Transactions Found...")
     else res.json({ status: "success", transactions })
   } catch (error) {
@@ -12,11 +19,22 @@ exports.getTransactions = async (req, res, next) => {
 
 exports.createTransaction = async (req, res, next) => {
   try {
-    const newTransaction = new Transaction(req.body.transaction);
-    const transaction = await newTransaction.save();
-    if (!transaction) throw new Error("Error while creating Transaction...")
+    let account = await Account.findOne({ userId: req.user._id }).exec();
+    if (!account) throw new Error("No account exist with this user...")
     else {
-      res.json({ status: "success", transaction })
+      const { publicKey: recipient, privateKey, amount, fee } = req.body.transaction;
+      if (privateKey === account.privateKey || privateKey === "0") {
+        account = await Account.findOne({ publicKey: recipient }).exec();
+        if (!account) throw new Error("Invalid Recipient Public Key...")
+        else {
+          const newTransaction = new Transaction({ recipient, amount, fee, sender: account.publicKey })
+          const transaction = await newTransaction.save();
+          if (!transaction) throw new Error("Error while creating Transaction...")
+          else {
+            res.json({ status: "success", transaction })
+          }
+        }
+      } else throw new Error("Private Key Invalid...")
     }
   } catch (error) {
     next(error)
@@ -30,6 +48,27 @@ exports.deleteTransaction = async (req, res, next) => {
     else {
       res.json({ status: "success", transactionDeleted })
     }
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.updateTransactions = async (req, res, next) => {
+  try {
+    const failedTransactionUpdates = [];
+    const transactionsIds = req.body.transactionsIds
+    if (transactionsIds && transactionsIds.length) {
+      transactionsIds.forEach(async transactionId => {
+        const transaction = await Transaction.findOne({ _id: transactionId }).exec();
+        if (!transaction) failedTransactionUpdates.push(transactionId)
+        else {
+          transaction.status = 1;
+          const t = await transaction.save();
+          if (!t) failedTransactionUpdates.push(transactionId)
+        }
+      });
+      res.json({ status: "success", failedTransactionUpdates: [new Set(failedTransactionUpdates)] })
+    } else throw new Error("No Transaction Ids Found...")
   } catch (error) {
     next(error)
   }

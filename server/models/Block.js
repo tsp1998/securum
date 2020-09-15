@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const BlockSchema = new Schema(
   {
-    index: { type: Number, required: true },
+    index: { type: Number, required: true }, //height
     nonce: { type: Number, required: true },
     hash: { type: String, required: true },
     prevBlockHash: { type: String, required: true },
