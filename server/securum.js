@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const sha256 = require("sha256");
 const morgan = require("morgan")
 
 const jwt = require("jsonwebtoken");
@@ -73,10 +72,8 @@ app.get("/", (req, res) => {
   res.json({ status: 200, message: "Welcome To SECURUM API" });
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "build", "index.html"))
-  })
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "build", "index.html"))
+})
 
 module.exports = app;

@@ -32,11 +32,11 @@ class Blockchain extends React.Component {
                 <span className="sr-only">Loading...</span>
               </div>
             ) || blockchain && blockchain.chain.map((block, i) => (
-              <div key={i} className="col-md-4 process">
+              <div key={i} className="col-md-4 process mb-5">
                 <Block
                   block={block}
                   index={i + 1}
-                  addArrowclassName={i % 3 !== 2 ? "addArrowClass" : ""}
+                  addArrowclassName={i % 3 !== 2 && i !== blockchain.chain.length-1 ? "addArrowClass" : ""}
                 />
               </div>
             ))}

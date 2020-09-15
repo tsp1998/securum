@@ -9,6 +9,7 @@ import { signup } from '../../api/authApi'
 
 //utils
 import { getErrorMessage } from '../../utils/error'
+import { Link } from 'react-router-dom'
 
 class SignUpForm extends React.Component {
 
@@ -38,7 +39,6 @@ class SignUpForm extends React.Component {
       else if (password !== confirmPassword) throw new Error("Password dosen't matched...")
       else {
         const res = await signup({ name, email, password, bio, role })
-        console.log('res', res)
         const { status, user } = res;
         if (status === "success") this.setState({
           name: "",
@@ -50,11 +50,11 @@ class SignUpForm extends React.Component {
           error: "",
           success: true,
           loading: false
-        }, () => { setTimeout(() => { this.setState({ success: false }) }, 5000) })
+        }, () => { setTimeout(() => { this.setState({ success: false }) }, 10000) })
         else throw new Error(getErrorMessage("Registration Failed... Try Again..."))
       }
     } catch (error) {
-      this.setState({ error: getErrorMessage("Something Went Wrong...", error), loading: false }, () => setTimeout(() => { this.setState({ error: "" }) }, 5000))
+      this.setState({ error: getErrorMessage("Something Went Wrong...", error), loading: false }, () => setTimeout(() => { this.setState({ error: "" }) }, 10000))
     }
   }
 
@@ -159,7 +159,7 @@ class SignUpForm extends React.Component {
                     {this.state.success && (
                       <div className="alert alert-success" role="alert">
                         Registration Successful...
-                        Sign In Here...
+                        <Link to="/signin">Sign In Here...</Link>
                       </div>
                     )}
                     <button className="site-btn sb-gradients mt-4">
@@ -169,6 +169,8 @@ class SignUpForm extends React.Component {
                         </div>
                       ) || "Signup"}
                     </button>
+                    <br/><br/>
+                    <Link to="/signin">Have Account Sign In Here...</Link>
                   </div>
                 </div>
               </form>

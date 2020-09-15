@@ -1,6 +1,7 @@
 const User = require("../models/User")
 const jwt = require("jsonwebtoken")
-const { JWT_SECRET } = require("../config/keys")
+const JWT_SECRET = process.env.NODE_ENV === "development" ?
+  require("../config/keys").JWT_SECRET : process.env.JWT_SECRET
 
 exports.signup = async (req, res, next) => {
   try {

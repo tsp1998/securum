@@ -53,7 +53,7 @@ class SignInForm extends React.Component {
         else throw new Error(getErrorMessage("Sign In Failed... Try Again..."))
       }
     } catch (error) {
-      this.setState({ error: getErrorMessage("Something Went Wrong...", error), loading: false }, () => setTimeout(() => { this.setState({ error: "" }) }, 5000))
+      this.setState({ error: getErrorMessage("Something Went Wrong...", error), loading: false }, () => setTimeout(() => { this.setState({ error: "" }) }, 10000))
     }
   }
 
@@ -104,6 +104,8 @@ class SignInForm extends React.Component {
                         </div>
                       ) || "Sign In"}
                     </button>
+                    <br /><br />
+                    <Link to="/signup">Don't Have Account Sign Up Here...</Link>
                   </div>
                 </div>
               </form>

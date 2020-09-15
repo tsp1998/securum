@@ -24,12 +24,18 @@ exports.getBlockchains = async (req, res, next) => {
 
 exports.createBlockchain = async (req, res, next) => {
   try {
-    let blockchain = await Blockchain.findOne({ blockchainMiner: req.user._id }).exec();
+    const blockchainMiner = req.user._id
+    let allBlockchains = await Blockchain.find({}).select("blockchainMiner").exec()
+    let blockchain = await Blockchain.findOne({ blockchainMiner }).exec();
     if (blockchain) throw new Error("Error Blockchain Already Exist...");
     else {
+      const networkMiners = []
+      if (allBlockchains && allBlockchains.length > 0) {
+        allBlockchains.forEach(bc => networkMiners.push(bc.blockchainMiner))
+      }
       const initialBlockchain = {
-        blockchainMiner: req.user._id,
-        networkMiners: [],
+        blockchainMiner,
+        networkMiners,
         pendingTransactions: [],
         chain: [
           {
@@ -43,6 +49,15 @@ exports.createBlockchain = async (req, res, next) => {
       blockchain = await newBlockchain.save();
       if (!blockchain) throw new Error("Error while creating Blockchain...")
       else {
+        if (allBlockchains && allBlockchains.length > 0) {
+          allBlockchains.forEach(async bc => {
+            const networkBlockchain = await Blockchain.findOne({ blockchainMiner: bc.blockchainMiner }).exec()
+            if (networkBlockchain && networkBlockchain.networkMiners) {
+              networkBlockchain.networkMiners = [...new Set([...networkBlockchain.networkMiners, ...blockchain._id])]
+              networkBlockchain.save()
+            }
+          })
+        }
         res.json({ status: "success", blockchain })
       }
     }
@@ -67,6 +82,25 @@ exports.updateBlockchain = async (req, res, next) => {
       if (!blockchainUpdated) throw new Error("Error while updating Blockchain...")
       else {
         res.json({ status: "success", blockchainUpdated })
+      }
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.replaceChain = async (req, res, next) => {
+  try {
+    const { minerId, newChain } = req.body.replaceChainData;
+    const blockchainMiner = minerId || req.user._id;
+    let blockchain = await Blockchain.findOne({ blockchainMiner }).exec()
+    if (!blockchain) throw new Error("Blockchain not found...")
+    else {
+      blockchain.chain = newChain;
+      blockchain = await blockchain.save()
+      if (!blockchain) throw new Error("Error while replacing Blockchain...")
+      else {
+        res.json({ status: "success", replacedBlockchain: blockchain })
       }
     }
   } catch (error) {

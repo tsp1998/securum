@@ -30,3 +30,11 @@ export const updateBlockchain = blockchainUpdateData => {
     }
   }).then(res => res.data).catch(err => err)
 }
+
+export const replaceBlockchain = replaceChainData => {
+  return axios.put(`${SERVER_API}/blockchain/replace`, { replaceChainData }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("securumToken")}`
+    }
+  }).then(res => res.data).catch(err => err)
+}

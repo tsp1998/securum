@@ -9,7 +9,7 @@ import {
 
 //api
 import {
-  createAccount, getAccount, getAllAccountsPublicKeys,getAccountBalance
+  createAccount, getAccount, getAllAccountsPublicKeys, getAccountBalance
 } from '../../api/accountApi'
 import { createTransaction } from '../../api/transactionApi'
 
@@ -35,8 +35,9 @@ export const createAccountStart = (keys, successCb, errorCb) => async dispatch =
       })
       dispatch(createAccountSuccess(account))
       dispatch(getTransactionsStart())
+      dispatch(getAccountBalanceStart())
       successCb()
-      setTimeout(() => { dispatch({ type: ACCOUNT_SET_SUCCESS, value: false }) }, 5000)
+      setTimeout(() => { dispatch({ type: ACCOUNT_SET_SUCCESS, value: false }) }, 10000)
     } else throw new Error("Error While creating Account...");
   } catch (error) {
     dispatch(createAccountFail(error.message ||

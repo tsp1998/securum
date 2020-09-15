@@ -1,4 +1,5 @@
-const { JWT_SECRET } = require("../config/keys");
+const JWT_SECRET = process.env.NODE_ENV === "development" ?
+  require("../config/keys").JWT_SECRET : process.env.JWT_SECRET
 const User = require("../models/User")
 const jwt = require("jsonwebtoken");
 

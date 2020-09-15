@@ -23,7 +23,7 @@ export const createTransactionStart = (transactionData, cb) => async dispatch =>
     if (status === "success") {
       dispatch(createTransactionSuccess(transaction))
       cb();
-      setTimeout(() => { dispatch({ type: TRANSACTIONS_SET_SUCCESS, value: false }) }, 5000)
+      setTimeout(() => { dispatch({ type: TRANSACTIONS_SET_SUCCESS, value: false }) }, 10000)
     } else throw new Error("Error While creating Transaction...");
   } catch (error) {
     dispatch(createTransactionFail(error.message ||

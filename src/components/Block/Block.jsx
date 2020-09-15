@@ -10,9 +10,9 @@ import "./Block.scss"
 import securumCoin from '../../assets/images/securumCoin.jpg'
 
 const Block = (props) => {
-  const { addArrowClass, block, index } = props
+  const { addArrowclassName, block, index } = props
   return (
-    <div className={`blockchain-step ${addArrowClass}`}>
+    <div className={`blockchain-step ${addArrowclassName}`}>
       <figure className="blockchain-icon">
         <img src={securumCoin} alt="#" />
       </figure>

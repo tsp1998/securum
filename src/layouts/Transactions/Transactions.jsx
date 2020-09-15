@@ -18,7 +18,7 @@ const Transactions = (props) => {
   }
   return (
     <div className="transactions">
-      <div className="table-info d-flex justify-content-around align-items-center">
+      <div className="table-info">
         <h2 className="pt-3">Transactions</h2>
         {currentUser && currentUser.role === 2 && <button className="btn btn-primary" onClick={props.startMining}>
           {blockMining ? (

@@ -29,7 +29,7 @@ export const createBlockStart = () => async dispatch => {
     const { status, block } = await createBlock();
     if (status === "success") {
       dispatch(createBlockSuccess(block))
-      setTimeout(() => { dispatch({ type: BLOCK_SET_SUCCESS, value: false }) }, 5000)
+      setTimeout(() => { dispatch({ type: BLOCK_SET_SUCCESS, value: false }) }, 10000)
     } else throw new Error("Error While creating Block...");
   } catch (error) {
     dispatch(createBlockFail(error.message ||

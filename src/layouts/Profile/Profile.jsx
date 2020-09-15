@@ -39,7 +39,7 @@ import {
   selectTransaction, selectTransactions, selectTransactionApiCall,
   selectTransactionError, selectTransactionLoading, selectTransactionSuccess
 } from '../../redux/transaction/transactionSelectors'
-import { createBlockchainStart, getBlockchainStart } from '../../redux/blockchain/blockchainActions'
+import { createBlockchainStart, getBlockchainStart, consensusStart } from '../../redux/blockchain/blockchainActions'
 import {
   createAccountStart, getAccountStart, getAccountBalanceStart,
   clearAllAccountsPublicKeys, getAllAccountsPublicKeysStart
@@ -72,6 +72,7 @@ class Profile extends React.Component {
     formNumber: 0,
     loading: false,
     mining: false,
+    consensusLoading: false,
     error: ""
   }
 
@@ -83,6 +84,13 @@ class Profile extends React.Component {
     const { currentUser } = this.props;
     if (currentUser && currentUser.role === 2)
       this.props.getBlockchainStart();
+  }
+
+  consensus = () => {
+    this.setState({ consensusLoading: true })
+    this.props.consensusStart(() => {
+      this.setState({ consensusLoading: false })
+    })
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -103,7 +111,7 @@ class Profile extends React.Component {
             if (account)
               getAccountBalanceStart()
           })
-        }, 5000);
+        }, 10000);
       })
     } else alert("Plase Select Atleast One Transaction")
   }
@@ -177,7 +185,7 @@ class Profile extends React.Component {
       accountBalance,
       account, accountError, accountApiCall, accountLoading, createAccountStart, accountSuccess,
     } = this.props;
-    const { formNumber, loading, mining: blockMining } = this.state;
+    const { formNumber, loading, mining: blockMining, consensusLoading } = this.state;
     return (
 
       <section className="profile-page spad" >
@@ -254,7 +262,16 @@ class Profile extends React.Component {
                   </div>
                 </div>
               </div>
-              <button className="post-loadmore site-btn sb-gradients sbg-line mt-5">LOAD MORE</button>
+              <button
+                className="post-loadmore site-btn sb-gradients sbg-line mt-5"
+                onClick={this.consensus}
+              >
+                {consensusLoading && (
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                ) || "CONSENSUS"}
+              </button>
             </div>
             <div className="col-lg-4 col-md-6 sideber pt-5 pt-lg-0 order-1 order-md-2">
               <ProfileCard member={currentUser} greet={true} />
@@ -403,7 +420,8 @@ const mapDispatchToProps = {
   getTransactionsStart,
   createTransactionStart,
   mineBlockStart,
-  getAccountBalanceStart
+  getAccountBalanceStart,
+  consensusStart
 }
 
 

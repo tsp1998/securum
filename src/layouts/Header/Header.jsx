@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 //routing
 import { Link, withRouter } from 'react-router-dom'
 
@@ -9,6 +9,9 @@ import "./Header.scss"
 import logo from '../../assets/images/logo.png'
 
 const Header = (props) => {
+
+  const [toggleSidebar, setToggleSidebar] = useState(false)
+
   const { pageName } = props;
   const logout = () => {
     localStorage.removeItem("securumToken");
@@ -21,8 +24,15 @@ const Header = (props) => {
         <Link to="/" className="site-logo">
           <img src={logo} alt="" />
         </Link>
-        <div className="responsive-bar"><i className="fa fa-bars faIcon"></i></div>
-        <Link to="" className="user"><i className="fa fa-user faIcon"></i></Link>
+        <div
+          className={`responsive-bar`}
+          onClick={() => setToggleSidebar(!toggleSidebar)}>
+          <i className="fa fa-bars faIcon"></i>
+        </div>
+        <Link
+          to={window && localStorage.securumToken ? "/profile" : pageName === "Sign In" ? "/signup" : "/signin"}
+          className="user"
+        ><i className="fa fa-user faIcon"></i></Link>
         {
           window && !localStorage.securumToken && (
             <Link to={`${pageName === "Sign In" ? "/signup" : "/signin"}`} className="site-btn">
@@ -34,7 +44,7 @@ const Header = (props) => {
             </Link>
           )
         }
-        <nav className="main-menu">
+        <nav className={`main-menu ${toggleSidebar ? "show-sidebar" : ""}`}>
           <ul className="menu-list">
             <li><Link to="/about">About</Link></li>
             <li><Link to="/blog">Blog</Link></li>

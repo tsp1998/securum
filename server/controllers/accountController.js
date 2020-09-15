@@ -61,13 +61,10 @@ exports.getAccountBalance = async (req, res, next) => {
       let balance = 0;
       blocks.forEach(block => {
         block.transactions.forEach(transaction => {
-          console.log('transaction', transaction)
           if (transaction.sender === userPublicKey) {
-            console.log("sender")
             balance -= transaction.amount + transaction.fee
           }
           if (transaction.recipient === userPublicKey) {
-            console.log("recipient")
             balance += transaction.amount
           }
         })

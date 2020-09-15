@@ -7,11 +7,9 @@
   },
   "description": "Securum",
   "private": true,
-  "homepage": ".",
   "main": "./server/server.js",
   "author": "Tandale Shubham",
   "license": "ISC",
-  "bin": "",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
