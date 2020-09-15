@@ -13,6 +13,9 @@ import {
 } from '../../api/accountApi'
 import { createTransaction } from '../../api/transactionApi'
 
+//actions
+import { getTransactionsStart } from '../transaction/transactionActions'
+
 export const setAccount = (account) => ({ type: SET_ACCOUNT, account });
 export const clearAccount = () => ({ type: CLEAR_ACCOUNT })
 export const clearAllAccountsPublicKeys = () => ({ type: CLEAR_ALL_ACCOUNTS_PUBLIC_KEYS_FAIL })
@@ -31,6 +34,7 @@ export const createAccountStart = (keys, successCb, errorCb) => async dispatch =
         amount: 10, fee: 0
       })
       dispatch(createAccountSuccess(account))
+      dispatch(getTransactionsStart())
       successCb()
       setTimeout(() => { dispatch({ type: ACCOUNT_SET_SUCCESS, value: false }) }, 5000)
     } else throw new Error("Error While creating Account...");
@@ -50,12 +54,13 @@ export const createAccountFail = (error) => ({
 })
 
 //get Account
-export const getAccountStart = () => async dispatch => {
+export const getAccountStart = (cb) => async dispatch => {
   dispatch({ type: GET_ACCOUNT_DETAILS_START })
   try {
     const { status, account } = await getAccount();
     if (status === "success") {
       dispatch(getAccountSuccess(account))
+      cb()
     } else throw new Error("Error While getting Account...");
   } catch (error) {
     dispatch(getAccountFail(error.message ||

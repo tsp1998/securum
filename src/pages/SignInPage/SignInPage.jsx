@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Redirect } from 'react-router-dom'
+
 //css
 import "./SignInPage.scss"
 
@@ -12,6 +14,7 @@ import Footer from '../../layouts/Footer/Footer'
 
 
 const SignInPage = () => {
+  if (window && localStorage.securumToken) return <Redirect to="/" />
   return (
     <div className="index-page">
       <Header pageName="Sign In" />

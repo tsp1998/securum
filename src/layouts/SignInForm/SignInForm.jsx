@@ -106,7 +106,6 @@ class SignInForm extends React.Component {
                     </button>
                   </div>
                 </div>
-                <Link to="/signup">Sign Up</Link>
               </form>
             </div>
             <div className="col-lg-5 mt-5 mt-lg-0">

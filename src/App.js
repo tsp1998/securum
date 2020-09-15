@@ -28,6 +28,9 @@ import { BLOCKCHAIN_SET_SUCCESS } from './redux/blockchain/blockchainTypes'
 // import { SET_USER, SET_AUTHENTICATED } from "./redux/actions/userTypes";
 // import { logOut } from "./redux/actions/userActions";
 
+//auth
+import PrivateRoute from './auth/PrivateRoute'
+
 //pages
 const IndexPage = React.lazy(() => import("./pages/IndexPage/IndexPage"));
 const AboutPage = React.lazy(() => import("./pages/AboutPage/AboutPage"));
@@ -37,7 +40,6 @@ const SingleBlogPage = React.lazy(() => import("./pages/SingleBlogPage/SingleBlo
 const SignInPage = React.lazy(() => import("./pages/SignInPage/SignInPage"));
 const SignUpPage = React.lazy(() => import("./pages/SignUpPage/SignUpPage"));
 const ProfilePage = React.lazy(() => import("./pages/ProfilePage/ProfilePage"));
-
 
 //routing and api
 // import axios from "axios";
@@ -78,7 +80,7 @@ function App() {
             <Route exact path="/single-blog" component={SingleBlogPage} />
             <Route exact path="/signin" component={SignInPage} />
             <Route exact path="/signup" component={SignUpPage} />
-            <Route exact path="/profile" component={ProfilePage} />
+            <PrivateRoute exact path="/profile" component={ProfilePage} />
             {/* <Authenitication exact path="/login-signup" component={LoginSignUpPage} /> */}
             {/* <Redirect to="/single-blog" /> */}
           </Suspense>

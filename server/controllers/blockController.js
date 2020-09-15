@@ -10,6 +10,19 @@ exports.getBlocks = async (req, res, next) => {
   }
 }
 
+exports.getBlock = async (req, res, next) => {
+  try {
+    const blockHash = req.params.blockHash;
+    const block = await Block.findOne({ hash: blockHash }).exec()
+    if (!block) throw new Error("Block Not Found...")
+    else {
+      res.json({ status: "success", block })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 exports.createBlock = async (req, res, next) => {
   try {
     const newBlock = new Block(req.body.block);

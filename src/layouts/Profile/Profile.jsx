@@ -76,15 +76,13 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    const{account} = this.props;
-    this.props.getAccountStart();
+    const { account } = this.props;
+    this.props.getAccountStart(() => { this.props.getAccountBalanceStart(); });
     this.props.getAllAccountsPublicKeysStart();
     this.props.getTransactionsStart();
     const { currentUser } = this.props;
     if (currentUser && currentUser.role === 2)
       this.props.getBlockchainStart();
-    if (account)
-      this.props.getAccountBalanceStart();
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -99,8 +97,11 @@ class Profile extends React.Component {
     if (selectedTransactions.length > 0) {
       this.setState({ mining: true }, () => {
         setTimeout(() => {
-          this.props.mineBlockStart(selectedTransactions, () => {
+          const { mineBlockStart, account, getAccountBalanceStart } = this.props;
+          mineBlockStart(selectedTransactions, () => {
             this.setState({ selectedTransactions: [], mining: false })
+            if (account)
+              getAccountBalanceStart()
           })
         }, 5000);
       })
@@ -156,7 +157,7 @@ class Profile extends React.Component {
           let { publicKey, privateKey, amount, fee } = this.state;
           publicKey = sha256(publicKey)
           privateKey = sha256(privateKey)
-          this.props.createTransactionStart({ publicKey, privateKey, amount, fee }, () => {
+          this.props.createTransactionStart({ publicKey, privateKey, amount, fee: fee || 0 }, () => {
             this.setState({ publicKey: "", amount: "", fee: "", privateKey: "", loading: false })
           })
         } catch (error) {
@@ -296,7 +297,10 @@ class Profile extends React.Component {
                   ) :
                     (
                       <>
-                        <p><strong>Balance: </strong>{accountBalance ? accountBalance : 0}</p>
+                        <p>
+                          <strong>Balance: </strong>
+                          {!accountLoading && accountBalance ? accountBalance : ""}
+                        </p>
                         <form
                           className="widget-account-from"
                           method="post"

@@ -2,9 +2,21 @@ const Blockchain = require("../models/Blockchain")
 
 exports.getBlockchain = async (req, res, next) => {
   try {
-    const blockchain = await Blockchain.findOne({ blockchainMiner: req.user._id }).exec()
+    const query = {}
+    query.blockchainMiner = req.params.blockchainMiner || req.user._id;
+    const blockchain = await Blockchain.findOne(query).exec()
     if (!blockchain) throw new Error("No Blockchain Found...")
     else res.json({ status: "success", blockchain })
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.getBlockchains = async (req, res, next) => {
+  try {
+    const blockchains = await Blockchain.find({}).exec()
+    if (!blockchains) throw new Error("No Blockchains Found...")
+    else res.json({ status: "success", blockchains })
   } catch (error) {
     next(error)
   }

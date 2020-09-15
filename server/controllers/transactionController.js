@@ -24,10 +24,11 @@ exports.createTransaction = async (req, res, next) => {
     else {
       const { publicKey: recipient, privateKey, amount, fee } = req.body.transaction;
       if (privateKey === account.privateKey || privateKey === "0") {
+        const sender = privateKey === "0" ? "0" : account.publicKey;
         account = await Account.findOne({ publicKey: recipient }).exec();
         if (!account) throw new Error("Invalid Recipient Public Key...")
         else {
-          const newTransaction = new Transaction({ recipient, amount, fee, sender: account.publicKey })
+          const newTransaction = new Transaction({ recipient, amount, fee, sender })
           const transaction = await newTransaction.save();
           if (!transaction) throw new Error("Error while creating Transaction...")
           else {
